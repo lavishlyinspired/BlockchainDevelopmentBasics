@@ -55,7 +55,54 @@
     <blockquote>
 <p>You also have to know that Solidity supports multiple inheritances by copying code including polymorphism. All function calls are virtual, which means that the most derived function is called, except when the contract name is explicitly given. When a contract inherits from multiple contracts, only a single contract is created on the blockchain, and the code from all the base contracts is copied into the created contract.</p>
       </blockquote>
+ <h2>
+      <a id="user-content-header-2" class="anchor" href="#header-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visibility  and Modifiers</h2>
 
+
+   
+
+  <blockquote>
+      <p>there are four types of visibilities for functions and state variables.
+
+.</p>
+      </blockquote>
+        <p>
+Functions can be specified as being external, public, internal or private, where the default ispublic. For state variables, external is not possible and the default is internal.
+
+     .</p> 
+      
+      <ul class="task-list">
+    	  <li> public - all can access</li>
+      <li>external - Cannot be accessed internally, only externally</li>
+      <li>internal - only this contract and contracts deriving from it can access</li>
+  
+      <li>private - can be accessed only from this contract</li>
+
+      </ul>
+
+      <h2>
+
+
+<h2>Function Modifiers</h2>
+<p>They can automatically check a condition prior to executing the function.</p>
+
+<h2>Constructors</h2>
+<div class="admonition note">
+<ul>
+<li class="first admonition-title">A constructor is an <strong>optional function</strong> with the<strong> same name as the contract</strong> which is executed upon <strong>contract creation</strong>.</li>
+<li class="first admonition-title">Constructor functions can be either&nbsp;<code class="docutils literal"><span class="pre">public</span></code>&nbsp;or&nbsp;<code class="docutils literal"><span class="pre">internal</span></code>.</li>
+</ul>
+</div>
+
+<div class="admonition note">
+<h2 class="first admonition-title">Abstract Contracts and Interface</h2>
+</div>
+<ul>
+<li>If a contract does not implement all&nbsp; functions it can only be used as an interface.</li>
+<li>These abstract contracts are only provided to make the interface known to the compiler. Note the function without a body.</li>
+<li>If a contract does not implement all functions it can only be used as an interface.</li>
+</ul>
+<p>&nbsp;</p>
 
       <h5>
       <a id="user-content-header-5" class="anchor" href="#header-5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Header 5</h5>
