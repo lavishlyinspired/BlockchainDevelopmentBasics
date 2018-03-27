@@ -224,6 +224,214 @@
 </tr>
 </thead>
 <tbody>
+<section class="main-content">
+<h2><a id="user-content-header-2" class="anchor" href="https://lavishlyinspired.github.io/blog-workshops/#header-2"></a>Inheritance</h2>
+<blockquote>
+<p>In this chapter, I will be discussing the following topics.</p>
+</blockquote>
+<ul class="task-list">
+<li>Inheritance in depth.</li>
+<li>Visibility&nbsp; and&nbsp;Modifiers.</li>
+<li>Constructors.</li>
+<li>Abstract Contracts and Interface.</li>
+<li>Visibility&nbsp; and&nbsp;Modifiers.</li>
+<li>An example illustrating Inheritance in solidity.</li>
+<li>Use remix compiler to debug and run custom contract in the example above.</li>
+<li>Multiple&nbsp;Inheritance&nbsp;and Linearization.</li>
+<li>Inheriting Different Kinds of Members of the Same Name.</li>
+<li>Arguments for Base constructors</li>
+</ul>
+<h2><a id="user-content-header-2" class="anchor" href="https://lavishlyinspired.github.io/blog-workshops/#header-2"></a>Inheritance in Depth</h2>
+<blockquote>
+<p>There could be many documents or online sources available explaining&nbsp;Inheritance in solidity, But I will try to keep the explanation here as simple as I can.</p>
+</blockquote>
+<p>In Solidity, inheritance is much similar to inheritance in oriented object programming languages. You&rsquo;ll first write your base contract and tell that your new contract will inherit from the base one.</p>
+<blockquote>
+<p>You also have to know that Solidity supports multiple inheritances by copying code including polymorphism. All function calls are virtual, which means that the most derived function is called, except when the contract name is explicitly given. When a contract inherits from multiple contracts, only a single contract is created on the blockchain, and the code from all the base contracts is copied into the created contract.</p>
+</blockquote>
+<h2><a id="user-content-header-2" class="anchor" href="https://lavishlyinspired.github.io/blog-workshops/#header-2"></a>Function Modifiers</h2>
+<p>They can automatically check a condition prior to executing the function.</p>
+<h2>Constructors</h2>
+<div class="admonition note">
+<ul>
+<li class="first admonition-title">A constructor is an&nbsp;<strong>optional function</strong>&nbsp;with the<strong>&nbsp;same name as the contract</strong>&nbsp;which is executed upon&nbsp;<strong>contract creation</strong>.</li>
+<li class="first admonition-title">Constructor functions can be&nbsp;either&nbsp;<code class="docutils literal"><span class="pre">public</span></code>&nbsp;or&nbsp;<code class="docutils literal"><span class="pre">internal</span></code>.</li>
+</ul>
+</div>
+<div class="admonition note">
+<h2 class="first admonition-title">Abstract Contracts and Interface</h2>
+</div>
+<ul>
+<li>If a contract does not implement all functions it can only be used as an interface.</li>
+<li>These abstract contracts are only provided to make the interface known to the compiler. Note the function without a body.</li>
+<li>If a contract does not implement all functions it can only be used as an interface.</li>
+</ul>
+<p>&nbsp;</p>
+<div class="admonition note">
+<h2>Visibility and&nbsp;Modifiers</h2>
+<blockquote>
+<p>there are four types of visibilities for functions and state variables. .</p>
+</blockquote>
+<p>Functions can be specified as being&nbsp;external,&nbsp;public,&nbsp;internal&nbsp;or&nbsp;private, where the default&nbsp;ispublic. For state variables,&nbsp;external&nbsp;is not possible and the default is&nbsp;internal. .</p>
+<ul class="task-list">
+<li>public&nbsp;- all can access</li>
+<li>external&nbsp;- Cannot be accessed internally, only externally</li>
+<li>internal&nbsp;- only this contract and contracts deriving from it can access</li>
+<li>private&nbsp;- can be accessed only from this contract.</li>
+</ul>
+<p>&nbsp;</p>
+<h2>An example illustrating Inheritance in solidity.</h2>
+<pre class=" language-javascript"><code class=" language-javascript"><br />pragma solidity ^0.4.0;<br />contract Bank{<br /> uint private value;<br /> <br /> function Bank(uint amount){<br /> value = amount;<br /> }<br /> <br /> function deposit(uint amount)<br /> {<br /> value +=amount;<br /> }<br /> function withdraw(uint amount)<br /> {<br /> value -=amount;<br /> }<br /> function balance() returns (uint)<br /> {<br /> return value;<br /> }<br />}<br />contract Person <strong>is Bank(10)</strong>{<br /> string private name;<br /> uint age;<br /> function setName(string newName){<br /> name = newName;<br /> }<br /> function getName() returns (string){<br /> return name;<br /> }<br /> function setage(uint newage){<br /> age = newage;<br /> }<br /> function getAge() returns (uint){<br /> return age;<br /> <br /> }<br />}<br />
+</code></pre>
+<p>In the above example value is declared private.Hence it can not be accessed by child contract(Person)</p>
+<pre class=" language-javascript"><code class=" language-javascript"> <br />function balance() returns (uint)<br />{<br />return value;<br />}
+</code></pre>
+<p>&nbsp;</p>
+<p>In the above example if the value is declared internal. it can&nbsp;only be accessed by child contract(Person)</p>
+<pre class=" language-javascript"><code class=" language-javascript">contract TestInternal {<br /> <br />function balance() returns (uint)<br />{<br />return value;<br /><br />}<br /> <br />}</code></pre>
+<p><strong>Implementing Interfaces</strong>: function loan is declared in Bank contract but is left unimplemented.It should be implemented in the inherited contract before executing the contract,&nbsp;otherwise&nbsp;an error message will be displayed saying</p>
+<p>&nbsp;This contract does not implement all functions and thus cannot be created.</p>
+<pre class=" language-javascript"><code class=" language-javascript"> <br />&nbsp;function loan() returns (bool);
+</code></pre>
+<h2>&nbsp;Interface Example&nbsp;</h2>
+<p>&nbsp; &nbsp;This is how we declare an interface</p>
+<pre class=" language-javascript"><code class=" language-javascript">pragma solidity ^0.4.0;<br />interface Regulator{ <br />function loan() returns (bool);<br />}<br /><br />contract Bank is Regulator{<br />uint internal value;<br />....<br />....<br />....<br /><br /></code></pre>
+<p>&nbsp;</p>
+<h2>Interface Implementation</h2>
+<pre class=" language-javascript"><code class=" language-javascript"><br />function loan() returns (bool)<br /> {<br /> return true;<br /> }<br /><br /><br /><br />
+</code></pre>
+<p>&nbsp;<br /><span style="text-decoration: underline;"><em><strong>&nbsp;Git Hub repo</strong></em></span></p>
+<p><a href="https://github.com/lavishlyinspired/blog-workshops/tree/master/inheritance_tutorial02">https://github.com/lavishlyinspired/blog-workshops/tree/master/inheritance_tutorial02</a></p>
+<p>&nbsp;</p>
+</div>
+<h5><a id="user-content-header-5" class="anchor" href="https://lavishlyinspired.github.io/blog-workshops/#header-5"></a>Header 5</h5>
+<ol class="task-list">
+<li>This is an ordered list following a header.</li>
+<li>This is an ordered list following a header.</li>
+<li>This is an ordered list following a header.</li>
+</ol>
+<h6><a id="user-content-header-6" class="anchor" href="https://lavishlyinspired.github.io/blog-workshops/#header-6"></a>Header 6</h6>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Follows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A&nbsp;table</td>
+<td>A header</td>
+</tr>
+<tr>
+<td>A table</td>
+<td>A header</td>
+</tr>
+<tr>
+<td>A table</td>
+<td>A&nbsp;header</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>There's&nbsp;a horizontal rule above and below this.</p>
+<hr />
+<p>Here is an unordered list:</p>
+<ul class="task-list">
+<li>Salt-n-Pepa</li>
+<li>Bel Biv DeVoe</li>
+<li>Kid 'N Play</li>
+</ul>
+<p>And an ordered list:</p>
+<ol class="task-list">
+<li>Michael Jackson</li>
+<li>Michael Bolton</li>
+<li>Michael Bubl&eacute;</li>
+</ol>
+<p>And an unordered task list:</p>
+<ul class="task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox" />&nbsp;Create a sample markdown document</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox" />&nbsp;Add task lists to it</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="disabled" type="checkbox" />&nbsp;Take a vacation</li>
+</ul>
+<p>And a "mixed" task list:</p>
+<ul class="task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="disabled" type="checkbox" />&nbsp;Steal underpants</li>
+<li>?</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="disabled" type="checkbox" />&nbsp;Profit!</li>
+</ul>
+<p>And a nested list:</p>
+<ul class="task-list">
+<li>Jackson 5
+<ul class="task-list">
+<li>Michael</li>
+<li>Tito</li>
+<li>Jackie</li>
+<li>Marlon</li>
+<li>Jermaine</li>
+</ul>
+</li>
+<li>TMNT
+<ul class="task-list">
+<li>Leonardo</li>
+<li>Michelangelo</li>
+<li>Donatello</li>
+<li>Raphael</li>
+</ul>
+</li>
+</ul>
+<p>Definition lists can be used with HTML syntax. Definition terms are bold and italic.</p>
+<dl>
+<dt>Name</dt>
+<dd>Godzilla</dd>
+<dt>Born</dt>
+<dd>1952</dd>
+<dt>Birthplace</dt>
+<dd>Japan</dd>
+<dt>Color</dt>
+<dd>Green</dd>
+</dl>
+<hr />
+<p>Tables should have bold headings and alternating shaded rows.</p>
+<table>
+<thead>
+<tr>
+<th>Artist</th>
+<th>Album</th>
+<th>Year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Michael&nbsp;Jackson</td>
+<td>Thriller</td>
+<td>1982</td>
+</tr>
+<tr>
+<td>Prince</td>
+<td>Purple Rain</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>Beastie Boys</td>
+<td>License to Ill</td>
+<td>1986</td>
+</tr>
+</tbody>
+</table>
+<p>If a table is too wide, it should condense down and/or scroll horizontally.</p>
+<table>
+<thead>
+<tr>
+<th>Artist</th>
+<th>Album</th>
+<th>Year</th>
+<th>Label</th>
+<th>Awards</th>
+<th>Songs</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td>Michael Jackson</td>
 <td>Thriller</td>
