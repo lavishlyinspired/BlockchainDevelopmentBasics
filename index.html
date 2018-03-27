@@ -85,14 +85,16 @@
 <p>&nbsp;This contract does not implement all functions and thus cannot be created.</p>
 <pre class=" language-javascript"><code class=" language-javascript"> <br />&nbsp;function loan() returns (bool);
 </code></pre>
-<h2><strong>&nbsp;Interface Example</strong>&nbsp;</h2>
+<h2>&nbsp;Interface Example&nbsp;</h2>
 <p>&nbsp; &nbsp;This is how we declare an interface</p>
 <pre class=" language-javascript"><code class=" language-javascript">pragma solidity ^0.4.0;<br />interface Regulator{ <br />function loan() returns (bool);<br />}<br /><br />contract Bank is Regulator{<br />uint internal value;<br />....<br />....<br />....<br /><br /></code></pre>
 <p>&nbsp;</p>
-<h2>Interface Implementation<br /><br /><br /></h2>
+<h2>Interface Implementation</h2>
 <pre class=" language-javascript"><code class=" language-javascript"><br />function loan() returns (bool)<br /> {<br /> return true;<br /> }<br /><br /><br /><br />
 </code></pre>
-<p>&nbsp;<br />&nbsp;</p>
+<p>&nbsp;<br /><span style="text-decoration: underline;"><em><strong>&nbsp;Git Hub repo</strong></em></span></p>
+<p><a href="https://github.com/lavishlyinspired/blog-workshops/tree/master/inheritance_tutorial02">https://github.com/lavishlyinspired/blog-workshops/tree/master/inheritance_tutorial02</a></p>
+<p>&nbsp;</p>
 </div>
 <h5><a id="user-content-header-5" class="anchor" href="https://lavishlyinspired.github.io/blog-workshops/#header-5"></a>Header 5</h5>
 <ol class="task-list">
