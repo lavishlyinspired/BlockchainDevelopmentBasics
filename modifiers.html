@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -10,16 +11,15 @@
     <link rel="stylesheet" href="css/cayman.css">
   </head>
   <body>
-   
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<section class="page-header">
-<h1 class="project-name">Learning Blockchain Development</h1>
-<h2 class="project-tagline">Function Modifiers and Error Handling</h2>
-<!--a href="#" class="btn">View on GitHub</a>
+    <section class="page-header">
+      <h1 class="project-name">Learning Blockchain Development Baiscs Solidtiy Inheritance</h1>
+      <h2 class="project-tagline">Let's Begin programming.</h2>
+      <!--a href="#" class="btn">View on GitHub</a>
       <a href="#" class="btn">Download .zip</a>
-      <a href="#" class="btn">Download .tar.gz</a--></section>
-<section class="main-content">
+      <a href="#" class="btn">Download .tar.gz</a-->
+    </section>
+
+    <section class="main-content">
 <p>&nbsp;</p>
 <h2>The Smart Contract</h2>
 <pre><code>pragma solidity ^0.4.0;<br /><br />interface Regulator {<br /> function checkValue(uint amount) returns (bool);<br /> function loan() returns (bool);<br />}<br /><br />contract Bank is Regulator {<br /> uint private value;<br /> address private owner;<br /> <br /> modifier ownerFunc {<br /> require(owner == msg.sender);<br /> _;<br /> }<br /><br /> function Bank(uint amount) {<br /> value = amount;<br /> owner = msg.sender;<br /> }<br /> <br /> function deposit(uint amount) ownerFunc {<br /> value += amount;<br /> }<br /> <br /> function withdraw(uint amount) ownerFunc {<br /> if (checkValue(amount)) {<br /> value -= amount;<br /> }<br /> }<br /> <br /> function balance() returns (uint) {<br /> return value;<br /> }<br /> <br /> function checkValue(uint amount) returns (bool) {<br /> // Classic mistake in the tutorial value should be above the amount<br /> return value &gt;= amount;<br /> }<br /> <br /> function loan() returns (bool) {<br /> return value &gt; 0;<br /> }<br />}<br /><br />contract MyFirstContract is Bank(10) {<br /> string private name;<br /> uint private age;<br /> <br /> function setName(string newName) {<br /> name = newName;<br /> }<br /> <br /> function getName() returns (string) {<br /> return name;<br /> }<br /> <br /> function setAge(uint newAge) {<br /> age = newAge;<br /> }<br /> <br /> function getAge() returns (uint) {<br /> return age;<br /> }<br />}<br /><br />contract TestThrows {<br /> function testAssert() {<br /> assert(1 == 2);<br /> }<br /> <br /> function testRequire() {<br /> require(2 == 1);<br /> }<br /> <br /> function testRevert() {<br /> revert();<br /> }<br /> <br /> function testThrow() {<br /> throw;<br /> }<br />}<br /></code></pre>
@@ -31,5 +31,6 @@
 <pre><code><br /> function deposit(uint amount) ownerFunc {<br /> value += amount;<br /> }<br /> <br /> function withdraw(uint amount) ownerFunc {<br /> if (checkValue(amount)) {<br /> value -= amount;<br /> }<br /> }</code></pre>
 <h3>Conclusion: What does a modifier in solidity do?</h3>
 </section>
+
   </body>
 </html>
