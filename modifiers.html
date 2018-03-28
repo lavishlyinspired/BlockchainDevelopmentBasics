@@ -36,7 +36,7 @@
 <p>Modifiers can also&nbsp;receive arguments, ie:&nbsp;<em>modifier name(arg1), If the condition is true,&nbsp;<strong>_;</strong>&nbsp;on the line beneath is where the function body is placed. In other words, the function will be executed.</em></p>
 <h2>Using the Modifier</h2>
 <p>&nbsp;</p>
-<p>Well, we can use it in any function where we only want the smart contract creator to have access.</p>
+<p>Well, we can use it in any function where we only want the smart contract creator to have access</p>
 <p>Let's add it to the&nbsp;deposit() and withdraw<strong>()</strong>&nbsp;function:</p>
 <pre><code><br /> function deposit(uint amount) ownerFunc {<br /> value += amount;<br /> }<br /> <br /> function withdraw(uint amount) ownerFunc {<br /> if (checkValue(amount)) {<br /> value -= amount;<br /> }<br /> }</code></pre>
 <h3>Conclusion: Debugging in Remix</h3>
