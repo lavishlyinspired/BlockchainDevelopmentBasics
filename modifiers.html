@@ -18,18 +18,32 @@
       <a href="#" class="btn">Download .zip</a>
       <a href="#" class="btn">Download .tar.gz</a-->
     </section>
-
-    <section class="main-content">
+<section class="main-content">
 <p>&nbsp;</p>
 <h2>The Smart Contract</h2>
-<pre><code>pragma solidity ^0.4.0;<br /><br />interface Regulator {<br /> function checkValue(uint amount) returns (bool);<br /> function loan() returns (bool);<br />}<br /><br />contract Bank is Regulator {<br /> uint private value;<br /> address private owner;<br /> <br /> modifier ownerFunc {<br /> require(owner == msg.sender);<br /> _;<br /> }<br /><br /> function Bank(uint amount) {<br /> value = amount;<br /> owner = msg.sender;<br /> }<br /> <br /> function deposit(uint amount) ownerFunc {<br /> value += amount;<br /> }<br /> <br /> function withdraw(uint amount) ownerFunc {<br /> if (checkValue(amount)) {<br /> value -= amount;<br /> }<br /> }<br /> <br /> function balance() returns (uint) {<br /> return value;<br /> }<br /> <br /> function checkValue(uint amount) returns (bool) {<br /> // Classic mistake in the tutorial value should be above the amount<br /> return value &gt;= amount;<br /> }<br /> <br /> function loan() returns (bool) {<br /> return value &gt; 0;<br /> }<br />}<br /><br />contract MyFirstContract is Bank(10) {<br /> string private name;<br /> uint private age;<br /> <br /> function setName(string newName) {<br /> name = newName;<br /> }<br /> <br /> function getName() returns (string) {<br /> return name;<br /> }<br /> <br /> function setAge(uint newAge) {<br /> age = newAge;<br /> }<br /> <br /> function getAge() returns (uint) {<br /> return age;<br /> }<br />}<br /><br />contract TestThrows {<br /> function testAssert() {<br /> assert(1 == 2);<br /> }<br /> <br /> function testRequire() {<br /> require(2 == 1);<br /> }<br /> <br /> function testRevert() {<br /> revert();<br /> }<br /> <br /> function testThrow() {<br /> throw;<br /> }<br />}<br /></code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;This is the smart contract that you should copy and paste into the&nbsp;<a href="http://remix.ethereum.org/">Remix IDE</a>:</p>
+<pre><code>pragma solidity ^0.4.0;<br /><br />interface Regulator {<br /> function checkValue(uint amount) returns (bool);<br /> function loan() returns (bool);<br />}<br /><br />contract Bank is Regulator {<br /> uint private value;<br /> address private owner;<br /><br /> function Bank(uint amount) {<br /> value = amount;<br /> owner = msg.sender;<br /> }<br /> <br /> modifier ownerFunc {<br /> require(owner == msg.sender);<br /> _;<br /> }<br /> function deposit(uint amount) ownerFunc {<br /> value += amount;<br /> }<br /> <br /> function withdraw(uint amount) ownerFunc {<br /> if (checkValue(amount)) {<br /> value -= amount;<br /> }<br /> }<br /> <br /> function balance() returns (uint) {<br /> return value;<br /> }<br /> <br /> function checkValue(uint amount) returns (bool) {<br /> // Classic mistake in the tutorial value should be above the amount<br /> return value &gt;= amount;<br /> }<br /> <br /> function loan() returns (bool) {<br /> return value &gt; 0;<br /> }<br />}<br /><br />contract MyFirstContract is Bank(10) {<br /> string private name;<br /> uint private age;<br /> <br /> function setName(string newName) {<br /> name = newName;<br /> }<br /> <br /> function getName() returns (string) {<br /> return name;<br /> }<br /> <br /> function setAge(uint newAge) {<br /> age = newAge;<br /> }<br /> <br /> function getAge() returns (uint) {<br /> return age;<br /> }<br />}<br /><br />contract TestThrows {<br /> function testAssert() {<br /> assert(1 == 2);<br /> }<br /> <br /> function testRequire() {<br /> require(2 == 1);<br /> }<br /> <br /> function testRevert() {<br /> revert();<br /> }<br /> <br /> function testThrow() {<br /> throw;<br /> }<br />}<br /></code></pre>
 <h4>&nbsp;</h4>
+<h2>Obtaining owner's contract address</h2>
+<pre><code>contract Bank is Regulator {<br /> uint private value;<br /> address private owner;<br /><br /> function Bank(uint amount) {<br /> value = amount;<br /> owner = msg.sender;<br /> }<br /> </code></pre>
+<p>&nbsp;</p>
 <h2>Creating a Modifier</h2>
+<p>create a modifier that will only allow the&nbsp;<strong>owner</strong>&nbsp;of the contract to perform an action on the contract it is used.</p>
+<p>Require is a keyword that checks&nbsp;a condition.</p>
 <pre><code> <br /> modifier ownerFunc {<br /> require(owner == msg.sender);<br /> _;<br /> }<br /></code></pre>
+<h2>&nbsp;</h2>
+<p>Modifiers can also&nbsp;receive arguments, ie:&nbsp;<em>modifier name(arg1), If the condition is true,&nbsp;<strong>_;</strong>&nbsp;on the line beneath is where the function body is placed. In other words, the function will be executed.</em></p>
 <h2>Using the Modifier</h2>
 <p>&nbsp;</p>
+<p>Well, we can use it in any function where we only want the smart contract creator to have access.</p>
+<p>Let's add it to the&nbsp;deposit() and withdraw<strong>()</strong>&nbsp;function:</p>
 <pre><code><br /> function deposit(uint amount) ownerFunc {<br /> value += amount;<br /> }<br /> <br /> function withdraw(uint amount) ownerFunc {<br /> if (checkValue(amount)) {<br /> value -= amount;<br /> }<br /> }</code></pre>
-<h3>Conclusion: What does a modifier in solidity do?</h3>
+<h3>Conclusion: Debugging in Remix</h3>
+<p>If you want to give it a go in the Remix IDE, click the&nbsp;<strong>Create</strong>&nbsp;button to create the contract. Then, specify 20 in the deposit function text field on the right of the IDE and click on the function name to set it.</p>
+<p>It should work, and to verify, click&nbsp;<strong>balance</strong>.</p>
+<p>Now, try changing the Account dropdown at the top to a different account than the one used to create the smart contract and repeat the process above.</p>
+<p>You'll notice it won't work this time, the debugger will throw an error.</p>
 </section>
 
   </body>
